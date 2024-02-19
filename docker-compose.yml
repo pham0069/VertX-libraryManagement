@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: diep
+      POSTGRES_PASSWORD: diep
+      POSTGRES_DB: library
+    volumes:
+      - ./src/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  api:
+    build: .

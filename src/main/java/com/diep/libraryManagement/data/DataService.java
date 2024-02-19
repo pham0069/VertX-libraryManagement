@@ -36,7 +36,12 @@ public class DataService {
   }
 
   private DataService() {
-    this.sessionFactory = new Configuration().configure().buildSessionFactory();
+    try {
+      this.sessionFactory = new Configuration().configure().buildSessionFactory();
+    } catch (Exception e) {
+      System.out.println("Fail to create session factory");
+      e.printStackTrace();
+    }
     this.bookDao = new BookDao(sessionFactory);
     this.userDao = new UserDao(sessionFactory);
     this.borrowDao = new BorrowDao(sessionFactory);
